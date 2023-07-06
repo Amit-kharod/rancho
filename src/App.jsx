@@ -4,7 +4,7 @@ import * as THREE from 'three'
 import { Stats, OrbitControls } from '@react-three/drei'
 import { Robot } from './Components/Models/Robot'
 import { DoubleSide } from 'three'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 export default function App() {
   const [directions, setDirections] = useState([
@@ -17,6 +17,7 @@ export default function App() {
     'up',
     'down'
   ])
+  const mesh = useRef()
 
   return (
     <>
@@ -42,6 +43,10 @@ export default function App() {
           scale={[5, 5, 1]}>
           <planeBufferGeometry />
           <meshBasicMaterial color="orange" side={DoubleSide} />
+        </mesh>
+        <mesh position={[2, 0, 0]} ref={mesh}>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshStandardMaterial color={'red'} />
         </mesh>
         <Stats />
       </Canvas>
